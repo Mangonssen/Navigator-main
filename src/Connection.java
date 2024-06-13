@@ -4,6 +4,7 @@ public class Connection {
     private City city2;
     private double distance;
     
+    
     public Connection(City city1, City city2) {
         this.city1 = city1;
         this.city2 = city2;
@@ -21,9 +22,8 @@ public class Connection {
     public double getDistance() {
         return distance;
     }
-
-
-    private double getDistanceInKm(City city1, City city2) {
+    
+    public double getDistanceInKm(City city1, City city2) {
         double lat1 = city1.getLatitude();                  // lat1 auf den Wert von getLatitude() in der City-Klasse setzen
         double lon1 = city1.getLongitude();                 // lon1 auf den Wert von getLongitude() in der City-Klasse setzen
         double lat2 = city2.getLatitude();                  // lat2 auf den Wert von getLatitude() in der City-Klasse setzen

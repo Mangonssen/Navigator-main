@@ -8,16 +8,16 @@ public class Main {
         City stuttgart = new City("Stuttgart", 48.77593813959718, 9.17688481609677);
         City augsburg = new City("Augsburg", 48.3684765834842, 10.89671693335146);
         City regensburg = new City("Regensburg", 49.01662121288669, 12.092787603517024);
-        City wuerzburg = new City("Wuerzburg", 49.79296114327296, 49.945390533206055);
+        City wuerzburg = new City("Wuerzburg", 49.79296114327296, 9.945390533206055);
 
-        ingolstadt.toString(ingolstadt);
-        muenchen.toString(muenchen);
-        nuernberg.toString(nuernberg);
-        ulm.toString(ulm);
-        stuttgart.toString(stuttgart);
-        augsburg.toString(augsburg);
-        regensburg.toString(regensburg);
-        wuerzburg.toString(wuerzburg);
+        ingolstadt.toString();
+        muenchen.toString();
+        nuernberg.toString();
+        ulm.toString();
+        stuttgart.toString();
+        augsburg.toString();
+        regensburg.toString();
+        wuerzburg.toString();
 
         ingolstadt.addConnection(muenchen);
         ingolstadt.addConnection(nuernberg);
@@ -32,7 +32,19 @@ public class Main {
         regensburg.addConnection(nuernberg);
         nuernberg.addConnection(ulm);
 
+        System.out.println();
+        System.out.println();
 
+        for (Connection connection : stuttgart.getConnections()) {
+            System.out.println(connection.getCity1().getName() + " -> " + connection.getCity2().getName());
+        }
+
+        System.out.println();
+        System.out.println();
+        
         System.out.println("Beste Route: " + stuttgart.getRouteTo(regensburg).toString());
+        System.out.println(stuttgart.getConnections().get(0).getDistance());
+
+        System.out.println(stuttgart.getConnections().get(0).getDistanceInKm(stuttgart, regensburg));
     }
 }

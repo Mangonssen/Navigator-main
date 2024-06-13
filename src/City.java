@@ -41,12 +41,16 @@ public class City {
         return connections;
     }
 
-    public void toString(City city) {
-        if(city.getName() == "Ulm") {
-            System.out.println(city.getName() + " \t\t" + city.getLatitude() + " \t" + city.getLongitude());
+    public String toString() {
+
+        String blank = " ";
+
+        if(this.getName() == "Ulm") {
+            System.out.println(this.getName() + " \t\t" + this.getLatitude() + " \t" + this.getLongitude());
         } else {
-        System.out.println(city.getName() + " \t" + city.getLatitude() + " \t" + city.getLongitude());
+        System.out.println(this.getName() + " \t" + this.getLatitude() + " \t" + this.getLongitude());
     }
+        return blank;
     }
 
     public void addConnection (City cityToConnect) {
@@ -54,45 +58,25 @@ public class City {
         if(this == cityToConnect) {
             System.out.println("Die Stadt kann nicht mit sich selbst verknüpft werden.");
         } else {
-        Connection connection = new Connection(this, cityToConnect);
-        this.getConnections().add(connection);
-        cityToConnect.getConnections().add(connection);
+        Connection connection1 = new Connection(this, cityToConnect);
+        this.getConnections().add(connection1);
+        Connection connection2 = new Connection(cityToConnect, this);
+        cityToConnect.getConnections().add(connection2);
         }
     }
 
-    public ArrayList<Route> getRouteTo(City destination) {
-        
-        
-        return getShortestRoute(this, destination);
+    public Route getRouteTo(City destination) {
+
+        Route route = new Route(); 
+
+        route = Route.getShortestRoute(this, destination); //kürzeste Route
+
+        return route;
+
+
     }
 
-    public static Route getShortestRoute(City origin, City destination) {
     
-    Route blankRoute = new Route();
-    ArrayList<Route> allPossibleRoutes = new ArrayList<Route>();
-    addAllRoutes(allPossibleRoutes, blankRoute, origin, destination, null);
-
-    ArrayList<Route> routesOrderedByDistance = new ArrayList<Route>();
-
-    for(Route route : allPossibleRoutes) {
-        if(routesOrderedByDistance.isEmpty()) {
-            routesOrderedByDistance.add(route);
-        } else {
-            for(int i = 0; i < routesOrderedByDistance.size(); i++) {
-                if(route.totalDistance < routesOrderedByDistance.get(i).totalDistance) {
-                    routesOrderedByDistance.add(i, route);
-                    break;
-                } else if (i == routesOrderedByDistance.size() - 1) {
-                    routesOrderedByDistance.add(route);
-                    break;
-                }
-            }
-        }
-    }
-    allPossibleRoutes.toString();
-
-    return routesOrderedByDistance.get(0);
-    }
     
 }
 
